@@ -31,15 +31,14 @@ Um projeto desenvolvido para facilitar o processo de medição e cálculo de ár
 
    ```bash
    git clone https://github.com/seu-usuario/sistema-calcula-area.git
-Instale as dependências necessárias:
 
-´´´´bash
-Download
-Copy code
-pip install -r requirements.txt
-Execute o sistema:
+   
+2. Instale as dependências necessárias:
 
-´´´´bash
-Download
-Copy code
-python main.py
+   ```bash                                                                           
+   pip install -r requirements.txt                  
+
+3. Execute o sistema:
+
+   ```bash
+   python main.py
