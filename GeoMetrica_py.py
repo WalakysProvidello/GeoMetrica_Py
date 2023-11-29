@@ -1,57 +1,51 @@
+import math
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 
 # Função para calcular a área
 def calcular_area():
-    formas = formas.get()
-    valores = float(valores.get())
-    valores2 = float(valores2.get())
+    formas = combo_formas.get()
+    valor1 = float(entry_valor1.get())
+    valor2 = float(entry_valor2.get()) if entry_valor2.get() else None
 
     if formas == 'quadrado':
-        area = valores ** 2
-    elif formas == 'retângulo':
-        area = valores * valores2
-    elif formas == 'círculo':
-        area = 3.14159 * valores ** 2
-    elif formas == 'triângulo':
-        area = (valores * valores2) / 2
+        area = valor1 ** 2
+    elif formas == 'retangulo':
+        area = valor1 * valor2
+    elif formas == 'circulo':
+        area = 3.14159 * valor1 ** 2
+    elif formas == 'triangulo':
+        area = (valor1 * valor2) / 2
     else:
         messagebox.showerror('Erro', 'Selecione uma forma geométrica')
         return
 
-    messagebox.showinfo('Resultado', f'A área do {formas} é {area}')
+    resultado_label.config(text=f'Resultado: A área do {formas} é {area}')
 
+# Configuração da janela principal
+root = tk.Tk()
+root.title('Calculadora de Área')
 
-# Criando a janela principal
-janela = tk.Tk()
-janela.title('Área de Formas Geométricas')
+# Criar widgets
+label_formas = ttk.Label(root, text='Selecione a forma:')
+combo_formas = ttk.Combobox(root, values=['quadrado', 'retangulo', 'circulo', 'triangulo'])
+label_valor1 = ttk.Label(root, text='Digite o valor 1:')
+entry_valor1 = ttk.Entry(root)
+label_valor2 = ttk.Label(root, text='Digite o valor 2 (opcional):')
+entry_valor2 = ttk.Entry(root)
+calcular_button = ttk.Button(root, text='Calcular', command=calcular_area)
+resultado_label = ttk.Label(root, text='Resultado:')
 
-# Criando os widgets
-frame = ttk.Frame(janela, padding=(20, 10, 20, 10))
-frame.pack(fill=tk.BOTH, expand=True)
+# Layout dos widgets
+label_formas.grid(row=0, column=0, padx=10, pady=5, sticky='w')
+combo_formas.grid(row=0, column=1, padx=10, pady=5)
+label_valor1.grid(row=1, column=0, padx=10, pady=5, sticky='w')
+entry_valor1.grid(row=1, column=1, padx=10, pady=5)
+label_valor2.grid(row=2, column=0, padx=10, pady=5, sticky='w')
+entry_valor2.grid(row=2, column=1, padx=10, pady=5)
+calcular_button.grid(row=3, column=0, columnspan=2, pady=10)
+resultado_label.grid(row=4, column=0, columnspan=2, pady=5)
 
-formas = tk.StringVar()
-valores = tk.StringVar()
-valores2 = tk.StringVar()
-
-label_formas = ttk.Label(frame, text='Forma geométrica:')
-label_formas.grid(row=0, column=0, padx=(0, 10), pady=(0, 10), sticky=tk.W)
-combo_formas = ttk.Combobox(frame, textvariable=formas, values=('quadrado', 'retângulo', 'círculo', 'triângulo'))
-combo_formas.grid(row=0, column=1, padx=(0, 10), pady=(0, 10))
-
-label_valores = ttk.Label(frame, text='Valor:')
-label_valores.grid(row=1, column=0, padx=(0, 10), pady=(0, 10), sticky=tk.W)
-entry_valores = ttk.Entry(frame, textvariable=valores)
-entry_valores.grid(row=1, column=1, padx=(0, 10), pady=(0, 10))
-
-label_valores2 = ttk.Label(frame, text='Valor 2:')
-label_valores2.grid(row=2, column=0, padx=(0, 10), pady=(0, 10), sticky=tk.W)
-entry_valores2 = ttk.Entry(frame, textvariable=valores2)
-entry_valores2.grid(row=2, column=1, padx=(0, 10), pady=(0, 10))
-
-button_calcular = ttk.Button(frame, text='Calcular Área', command=calcular_area)
-button_calcular.grid(row=3, column=0, columnspan=2, pady=(0, 10))
-
-# Iniciando o loop principal
-janela.mainloop()
+# Executar o loop da aplicação
+root.mainloop()
